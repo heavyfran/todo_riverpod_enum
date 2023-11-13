@@ -3,11 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'pages/providers/theme/theme_provider.dart';
 import 'pages/todos_page.dart';
+import 'repositories/fake_todos_repository.dart';
+import 'repositories/providers/todos_repository_provider.dart';
 
 void main() {
   runApp(
-    const ProviderScope(
-      child: MyApp(),
+    ProviderScope(
+      overrides: [
+        todosRepositoryProvider.overrideWithValue(FakeTodosRepository())
+      ],
+      child: const MyApp(),
     ),
   );
 }
